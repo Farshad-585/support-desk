@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { FaUser } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import { useSelector, useDispatch } from 'react-redux'
-import { register } from '../features/auth/authSlice'
+import { register, reset } from '../features/auth/authSlice'
+import Spinner from '../components/Spinner'
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -15,8 +17,23 @@ const Register = () => {
   const { name, email, password, password2 } = formData
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const {user, isLoading, isSuccess, message} = useSelector((state) => state.auth)
+  const { user, isLoading, isSuccess, isError, message } = useSelector(
+    (state) => state.auth
+  )
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message)
+    }
+
+    if (isSuccess || user) {
+      navigate('/')
+    }
+
+    dispatch(reset())
+  }, [isError, isSuccess, user, dispatch, navigate, message])
 
   const onChange = (e) =>
     setFormData((prevState) => {
@@ -42,6 +59,10 @@ const Register = () => {
     dispatch(register(userData))
   }
 
+  if (isLoading) {
+    return <Spinner />
+  }
+
   return (
     <>
       <section className='heading'>
@@ -61,7 +82,8 @@ const Register = () => {
               value={name}
               onChange={onChange}
               placeholder='Enter name'
-              required></input>
+              required
+              autoComplete='on'></input>
           </div>
           <div className='form-group'>
             <input
@@ -72,7 +94,8 @@ const Register = () => {
               value={email}
               onChange={onChange}
               placeholder='Enter email'
-              required></input>
+              required
+              autoComplete='on'></input>
           </div>
           <div className='form-group'>
             <input
@@ -83,7 +106,8 @@ const Register = () => {
               value={password}
               onChange={onChange}
               placeholder='Enter password'
-              required></input>
+              required
+              autoComplete='on'></input>
           </div>
           <div className='form-group'>
             <input
@@ -94,7 +118,8 @@ const Register = () => {
               value={password2}
               onChange={onChange}
               placeholder='Confirm password'
-              required></input>
+              required
+              autoComplete='on'></input>
           </div>
           <div className='form-group'>
             <button className='btn btn-block'>Submit</button>
