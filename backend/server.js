@@ -1,6 +1,12 @@
 const express = require('express')
+const colors = require('colors')
 const { errorHandler } = require('./middleware/errorMiddleware')
 require('dotenv').config()
+const connectDB = require('./config/db')
+
+// Connect to MongoDB
+connectDB()
+
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
