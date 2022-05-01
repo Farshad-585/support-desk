@@ -25,6 +25,7 @@ Visit the website at https://farshad-support-desk.herokuapp.com/. You can either
   - HTML5
   - CSS
   - Javascript
+  - React
   - Asynchronous JavaScript
   - NodeJS
   - NPM
