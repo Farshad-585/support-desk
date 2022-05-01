@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
-const ticketSchema = new mongoose.Schema(
+const ticketSchema = mongoose.Schema(
   {
-    name: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'User',
@@ -10,7 +10,7 @@ const ticketSchema = new mongoose.Schema(
     product: {
       type: String,
       required: [true, 'Please select a product'],
-      enum: ['iPhone', 'iPad', 'MacBook', 'Mac Mini', 'iMac', 'iPod'],
+      enum: ['iPhone', 'Macbook Pro', 'iMac', 'iPad'],
     },
     description: {
       type: String,
@@ -19,7 +19,7 @@ const ticketSchema = new mongoose.Schema(
     status: {
       type: String,
       required: true,
-      enum: ['open', 'new', 'closed'],
+      enum: ['new', 'open', 'closed'],
       default: 'new',
     },
   },
