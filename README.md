@@ -29,13 +29,7 @@ Visit the website at https://farshad-support-desk.herokuapp.com/. You can either
   - NodeJS
   - NPM
   - ExpressJS
-  - EJS
-  - Bootsrap 5
   - MongoDB and Mongoose
-  - JOI Validations
-  - Cookies and Sessions
-  - Cloudinary
-  - Mapbox and GeoJSON
   - Heroku
 
 ---
